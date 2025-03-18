@@ -38,7 +38,7 @@ This guy is one of my favourite youtubers and he's part of a duo called SlushyNo
 
 [Click me!](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
 
-•─────────────────────────────•°•❀•°•─────────────────────────────•
+•───────────────────────•°•❀•°•───────────────────────•
 
 ### Want to learn how to code R?  ฅ(ᵔ꒳ ᵔマ.ᐟ
 
