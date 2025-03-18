@@ -30,7 +30,7 @@ Because this is gonna be me once I walk across that stage:
 
 <img src="https://c.tenor.com/NazCGD8UbOAAAAAd/tenor.gif" alt="martin solving" width="200"/>
 
-•─────────────────────────────•°•❀•°•─────────────────────────────•
+•────────────────────────•°•❀•°•────────────────────────•
 
 #### Wait, who is this guy that keeps popping up? ฅ^>⩊<^ ฅ
 This guy is one of my favourite youtubers and he's part of a duo called SlushyNoobz. Check them out **below**! 
