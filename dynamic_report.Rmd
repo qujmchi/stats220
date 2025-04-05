@@ -1,0 +1,161 @@
+---
+title: My dynamic report
+output: html_fragment
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+
+```
+
+```{css}
+@import url('https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100..800&family=Yusei+Magic&display=swap');
+
+h1, h2, h3, h4 { color: #fe93b3; font-family: 'Playpen Sans'; font-weight: 600; }
+
+body { background-color: #fff6ee; font-family: 'Playpen Sans'; color: #5c3728 }
+
+p { color: #5c3728; padding: 20px; }
+
+.title { background-color: #c53d59; color: #ffb2bf; font-weight: bold; padding: 20px; text-align: center; }
+```
+
+```{r load-data, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+
+# ==========================
+#    PART C: IMPORTING DATA IN R
+
+# Used the read_csv() function from the tidyverse package to read survey data
+logged_data <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vSgubzS6k4NDQofihsdo2jTizcJBEFSmmROlA4jh4YC9wci3XBf8cotrK2f3qTqtO21EyuVTicKo9VA/pub?gid=2047078314&single=true&output=csv")
+
+# ==========================
+#    PART D: EXPLORING DATA IN R
+# Used indentation and added comments to show new re-named variables clearer
+# Methods used: rename(), mutate()
+# Used "https://www.educative.io/answers/what-is-the-asnumeric-function-in-r" to convert into numeric values, as it would not print 
+# the following values.
+
+latest_data <- logged_data %>%
+  rename(
+    distracted_time = Timestamp, #1st column
+    distraction_type = `What diverted your attention?`,  #2nd column
+    distraction_duration = `How long did the distraction last?`, #3rd column
+    prior_activity = `What were you doing before the distraction?`, #4rd column
+    in_form_distraction = `How many different distractions did you experience while taking this form?` #5th column
+  ) %>%
+  mutate(distraction_duration = as.numeric(distraction_duration))
+
+# --------------------------------
+#    Summary values
+min_duration <- min(latest_data$distraction_duration, na.rm = TRUE)
+max_duration <- max(latest_data$distraction_duration, na.rm = TRUE)
+mean_duration <- mean(latest_data$distraction_duration, na.rm = TRUE)
+total_duration <- sum(latest_data$distraction_duration, na.rm = TRUE)
+
+# Methods used: na.rm=TRUE, $, min(), max(), mean(), sum()
+
+```
+
+## Analysis of My Daily Distractions
+
+This data tracks how often I get distracted, with the types of distraction, how often I'm distracted for, and the activities that make me vulnerable to being distracted.
+
+For my dynamic report, I will be analysing the data collected based on my daily distractions as a university student who often stays at home. My dataset records the type of distraction, the duration of each distraction, and what I was doing prior to being distracted.
+
+### Summary values
+
+In this section, I will extract code where I have identified a total of 4 summary values using summary methods, and two bar graphs to visually present my findings.
+
+The **minimum** distraction duration is `r min_duration` minutes.
+
+The **maximum** distraction duration is `r max_duration` minutes.
+
+The **average** distraction duration is `r round(mean_duration, 2)` minutes.
+
+The **total** distraction duration is `r total_duration` minutes.
+
+<!-- dynamic comment --> 
+
+```{r dynamic-comments, echo=FALSE, message=FALSE, warning=FALSE}
+dynamic_comment1 <- paste("The shortest recorded distraction lasted", min_duration, 
+                          "minutes, while the longest lasted", max_duration, "minutes.")
+print(dynamic_comment1)
+
+dynamic_comment2 <- paste("In total, I lost", total_duration, "minutes to distractions, averaging",
+                          round(mean_duration, 2), "minutes per distraction.")
+print(dynamic_comment2)
+
+```
+
+With these values, it has shown me how much time I spend being distracted, and also how much time I lose being off-track.
+
+#### Frequency of Distractions
+
+For the **first** bar graph, this visualizes the different forms of distraction that took my attention, helping me identify how often each type distracts me and which is the most common.
+
+```{r exploration, echo=FALSE, message=FALSE, warning=FALSE}
+# --------------------------------
+#    First bar graph - Different things that diverted my attention the most (Distraction Type vs Frequency)
+
+bargraph_1 <- latest_data %>%
+  separate_rows(distraction_type, sep = ", (?=[A-Z])") %>% # Separates values by commas but not the variable "Noise from outside (e.g. cars, rain, birds)"
+  ggplot(aes(y = distraction_type)) +
+  geom_bar(fill = "#ffb3d2") +
+  labs(title = "What different forms of distraction took my attention?",
+       subtitle = "The different types of distractions and their frequency",
+       x = "Frequency",
+       y = "Form of Distraction") + scale_x_continuous(breaks = seq(0, 10, by = 1)) + theme_minimal()
+
+bargraph_1
+
+# Methods used: separate_rows(), regex, ggplot(), aes(), geom_bar(), labs()
+# Line 45: Swapped name variables to axis-y for clearer readability of names as they overlap and don't wrap if it were in x-axis
+# Line 50.a: Used "https://stackoverflow.com/questions/63003022/change-scale-on-x-axis-in-ggplot-in-r" to modify numeric axis scale
+# Line 50.b: Used "https://ggplot2.tidyverse.org/reference/ggtheme.html" to apply themes to bar graph
+```
+
+#### Duration of Distractions
+
+For the **second** bar graph, this visualizes the total duration of each distraction type, helping me identify which type of distraction takes up most of my time.
+
+```{r exploration2, echo=FALSE, message=FALSE, warning=FALSE}
+# --------------------------------
+#    Second bar graph - How long did different things distract me for in 3 days (Distraction Type vs Duration)
+
+duration_summary <- latest_data %>%
+  separate_rows(distraction_type, sep = ", (?=[A-Z])") %>% 
+  group_by(distraction_type) %>%
+  summarize(total_duration = sum(distraction_duration, na.rm = TRUE))
+
+bargraph_2 <- ggplot(duration_summary, 
+                     aes(x = total_duration, y = distraction_type)) +
+  geom_col(fill = "#ade7f7") +
+  labs(title = "How long was I distracted?",
+       subtitle = "Total duration of each distraction within 3 days",
+       x = "Total Duration (in minutes)",
+       y = "Form of Distraction") +
+  geom_text(aes(label = total_duration), 
+            hjust = -0.2,  
+            size = 3) +
+  theme_minimal()
+
+bargraph_2
+
+# Methods used: separate_rows(), regex, ggplot(), aes(), geom_col(), labs(), sum()
+# Additional methods used: group_by(), summarize()
+  # Sourced from: "https://builtin.com/data-science/grouping-r"
+# Line (69): Both axes are named with two variables
+# Used "https://ggplot2.tidyverse.org/reference/geom_text.html" for Line X to label bars as some
+# values are very close together and difficult to differentiate
+```
+
+
+
+
+
+
+
+
+
+![](https://c.tenor.com/-qBsG1HwR4oAAAAC/tenor.gif)
