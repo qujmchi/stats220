@@ -1,0 +1,153 @@
+---
+title: "Due Tomorrow? Do Tomorrow!"
+output: html_document
+---
+
+```{=html}
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+```
+
+```{css, echo=FALSE}
+@import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&display=swap');
+
+:root {
+  --colour-1: #880D1E;
+  --colour-2: #DD2D4A;
+  --colour-3: #F26A8D;
+  --colour-4: #FFDEE2;
+  --colour-5: #94E3EE;
+  --colour-6: #FFFCF7;
+  --colour-7: #f1f1ec;
+}
+
+h2, h3, h4 { color: var(--colour-3); font-family: 'Gaegu'; font-weight: 600; margin-top: 45px; }
+
+body { background-color: var(--colour-4); color: var(--colour-2); font-size: 16px; font-family: 'Gaegu'; }
+
+p {
+  background-color: var(--colour-6); 
+  padding: 10px; 
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+p:has(img) {
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+h1.title {
+  color: var(--colour-1);
+  font-weight: bold;
+  font-size: 60px;
+  padding: 20px;
+  text-align: center;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+```
+
+![monkey scrolling](https://c.tenor.com/T2WwkyBGi2oAAAAd/tenor.gif)
+
+## Hey you! 
+
+![cat on phone](https://c.tenor.com/HM-tHjTAB-sAAAAd/tenor.gif){width=630}
+
+Yes, *you*! I’ve just caught your attention! 🤭
+
+That little pause in focus is what we call a **distraction**, which sparked this very idea that brought us here!  
+
+**This exploration dives into how often we get distracted, what pulls our attention away (and for how long), and what we were doing before it happened.** Now let’s explore the actual moments where my partner and I lost focus... well, the core data behind the distractions!
+
+## 12PM: A Distraction Odyssey 🥱
+
+Below is a scatter plot which illustrates which distractions occurred the most during the day.
+
+![type of distraction vs hour of day](plot1.png)
+
+As shown in the plot, distractions are most frequent between 12PM and 6PM. I would call this phenomenon, **the midday slump**. They are also seen towards the end of the usual working hours. I usually study or complete my assignments just after 12PM and continue until dinner, while being very vulnerable to being distracted during this time. My partner would have been working since 9AM and as time flies, so does his motivation to work 🥲
+
+The outliers, which are the two distractions that are logged at 12AM under "**pets**" and "**TV**" reflect the late nights which may have been caused by getting distracted earlier during the day. Hence, I had to hustle overtime to complete my tasks.
+
+The distraction types, "**people talking or someone talking to you**", "**pets**", "**phone notification**", and "**the urge to check social media**", are the most common as they are clustered tightly during the midday slump. Though I may be scientifically incorrect, I believe that as the day goes on, our drive to be productive and complete tasks slow down. This is *exactly* when we use any excuse to have a break, eat, talk, or be in a space away from work.
+
+I guess you could say we were *scatterbrained*...?
+
+## The Fast and The.. Distracted 🏎️💨
+
+Below is a bar plot showing what activities we were doing before getting distracted, and how long those distractions lasted on average.
+
+![average distraction time vs task before](plot2.png)
+
+This bar graph shows that I still live comfortably at home because I do no cooking - my mom does! Well.. mostly. I cook too, but all my attention goes towards the *actual* cooking because I do not want to cause accidental arson. 
+As for **reading**, I don't do any because TikTok summarises everything for me in 2-minute videos 😁 *Could this be the cause of my shortened attention span?* This is why there is no data for these two activities.
+
+Out of all the activities, "**eating**" had the highest average distraction duration at 6 minutes. This is most likely caused by my cats, who also want to eat and will do **anything** to take my attention in the middle of my meal. This result can also be caused by my mom talking to me, possibly asking me if her cooking is good 😋
+
+![cat crunching on kibble?](https://media.tenor.com/whmiFP2zGQQAAAAi/cat-meme-cat-eat.gif)
+
+"**Working**" is the second highest average distraction time at 5.8 minutes. Sitting at a desk for 8 hours doesn't sound like fun, and it seems very easy to spiral into an instant loop of distraction. 
+
+The other activities, "**studying**", "**watching TV**", "**using social media**", and "**doing house chores**", are all averaged around 2 to 3 minutes. This implies that while these activities are susceptible to distractions, the duration is usually shorter. This may be because it's easier to get back on track as these tasks usually have due dates.
+
+Overall, this plot revealed that the less engaging the task, the longer the distraction... because who wants to work any way?
+
+
+## Are you still reading '*Due Tomorrow? Do Tomorrow*'?
+
+We are almost there, don't get distracted just yet! You've got a little supporter to help you keep going 🎉
+
+![grinning gato](https://c.tenor.com/9Nr32cJWZ8oAAAAC/tenor.gif){width=500}
+
+
+## Work, Interrupted
+
+Lastly, below is a density plot which compares how intense distractions can get when studying or working.
+
+![studying&working vs intensity](plot3.png)
+
+Looking at the "**studying**" curve, we can see that majority of the distractions are mild as they are peaked between a rate of 2 and 3. This implies that while I was getting distracted while studying, these distractions are fleeting and have minimal impact on my current task. These distractions strongly suggest that they are quick, or they don't interest me enough to have all my attention. Therefore, it was easier for me to refocus and return to studying.
+
+n the other hand, the "**working**" curve shows a wider distribution as it has moderate to moderately extreme intensity. There are two noticeable peaks in this curve, which is lined at a rate of 5 and a smaller peak at a rate of 7.5. This implies that when distractions hit when working, they have a greater impact on concentration and is harder to bounce back from. This may be because the nature of work tasks are demanding and/or require more brain power. We could also take into account the mental fatigue that my partner may be experiencing during his work hours, where we can consider his lack of sleep.
+
+Work really did get interrupted.
+
+## Distractions are everywhere.
+
+And I'm so prone to it. 
+
+![coding cat](coding_cat.jpg)
+
+Well.. I'm going take a 5 minute break. 
+
+```{js}
+$(function() {
+  $(".level2").css('visibility', 'hidden');
+  $(".level2").first().css('visibility', 'visible');
+  $(".container-fluid").height($(".container-fluid").height() + 300);
+  $(window).on('scroll', function() {
+    $('h2').each(function() {
+      var h2Top = $(this).offset().top - $(window).scrollTop();
+      var windowHeight = $(window).height();
+      if (h2Top >= 0 && h2Top <= windowHeight / 2) {
+        $(this).parent('div').css('visibility', 'visible');
+      } else if (h2Top > windowHeight / 2) {
+        $(this).parent('div').css('visibility', 'hidden');
+      }
+    });
+  });
+})
+```
+
+```{css}
+.figcaption {display: none}
+```
